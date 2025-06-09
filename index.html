@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  body {
+    height: 100vh;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .glow-box {
+    position: relative;
+    padding: 4px; /* For the border */
+    border-radius: 20px;
+    background: #111;
+    overflow: hidden;
+  }
+
+  .glow-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      120deg,
+      #ff0000,
+      #ff7300,
+      #ffeb00,
+      #47ff00,
+      #00ffee,
+      #2b65ff,
+      #8000ff,
+      #ff0080,
+      #ff0000
+    );
+    background-size: 200% 200%;
+    animation: rotate 6s linear infinite;
+    z-index: 0;
+    filter: blur(20px);
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .calculator {
+    position: relative;
+    z-index: 1;
+    background-color: #1f1f1f;
+    padding: 40px 30px;
+    border-radius: 16px;
+    text-align: center;
+    width: 300px;
+    color: white;
+  }
+
+  .calculator h1 {
+    margin-bottom: 25px;
+    font-size: 28px;
+  }
+
+  .calculator input,
+  .calculator select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .calculator button {
+    width: 100%;
+    padding: 12px;
+    background-color: #00bcd4;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .calculator button:hover {
+    background-color: #0097a7;
+  }
+
+  #Result {
+    margin-top: 25px;
+    font-size: 24px;
+    color: #fff;
+  }
+
+    </style>
+</head>
+<body>
+    
+  <div class="glow-box">
+    <div class="calculator">
+      <h1>Calculator</h1>
+      <input type="number" id="num1" placeholder="Enter first number" />
+      <select name="operator" id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+      </select>
+      <input type="number" id="num2" placeholder="Enter second number" />
+      <button onclick="calculate()">Calculate</button>
+      <div id="Result"><h1>Result:</h1></div>
+    </div>
+  </div>
+
+  <script>
+    function calculate() {
+      let num1 = parseFloat(document.getElementById("num1").value);
+      let num2 = parseFloat(document.getElementById("num2").value);
+      let operator = document.getElementById("operator").value;
+      let Result;
+
+      switch (operator) {
+        case "+":
+          Result = num1 + num2;
+          break;
+        case "-":
+          Result = num1 - num2;
+          break;
+        case "*":
+          Result = num1 * num2;
+          break;
+        case "/":
+          Result = num2 === 0 ? "Cannot divide by zero" : num1 / num2;
+          break;
+        default:
+          Result = "Invalid operator";
+      }
+
+      document.getElementById("Result").innerHTML = `<h1>Result: ${Result}</h1>`;
+    }
+  </script>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+
+    <div class="calculator">
+        <input type="number" id="num1" placeholder="Enter a 1st Integer" >
+        <select name="opreator" id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="number" id="num2" placeholder="Enter a 1st Integer" >
+        <br>
+        <button onclick="calculate()">Calculate</button>
+    </div>
+    <h2 id="Result">Result:</h2>
+
+    <script>
+        function calculate()
+        {
+            
+                let num1 = parseFloat(document.getElementById("num1").value);
+                let num2 = parseFloat(document.getElementById("num2").value);
+                let opreator = document.getElementById("operator").value;
+                let result;
+            
+                switch(opreator)
+                {
+                    case '+':
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        result = num1 - num2;
+                        break;
+                    case '*':
+                        result = num1 * num2;
+                        break;
+                    case '/':
+                        result = num1 / num2;
+                        break;
+                        default:
+                            result = "Invalid Opreator";
+                }
+                document.getElementById("Result").innerHTML = `Result:${result}`;
+        }
+        
+    // function calculate() {
+    //   let num1 = parseFloat(document.getElementById("num1").value);
+    //   let num2 = parseFloat(document.getElementById("num2").value);
+    //   let operator = document.getElementById("operator").value;
+    //   let Result;
+
+    //   switch (operator) {
+    //     case "+":
+    //       Result = num1 + num2;
+    //       break;
+    //     case "-":
+    //       Result = num1 - num2;
+    //       break;
+    //     case "*":
+    //       Result = num1 * num2;
+    //       break;
+    //     case "/":
+    //       Result = num2 === 0 ? "Cannot divide by zero" : num1 / num2;
+    //       break;
+    //     default:
+    //       Result = "Invalid operator";
+    //   }
+
+    //   document.getElementById("Result").innerHTML = `<h1>Result: ${Result}</h1>`;
+    // }
+  </script>
+
+
+            
+    </script>
+    
+</body>
+</html>
+
+
+
+
+   -->
